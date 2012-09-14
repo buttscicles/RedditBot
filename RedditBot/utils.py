@@ -1,9 +1,16 @@
+
+from RedditBot import bot
+from RedditBot.ircglob import glob
+from itertools import imap
 from HTMLParser import HTMLParser
 import requests
 
 headers = {'User-Agent': 'irc.gamesurge.net #redditmc/RedditBot'}
 timeout = 5
 
+def isadmin(prefix):
+    admins = bot.config.get('ADMINS', [])
+    return any(imap(lambda x: glob(x).matches(prefix), admins))
 
 def make_request_json(url, params={}):
     try:

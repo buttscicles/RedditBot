@@ -1,5 +1,5 @@
 
-from RedditBot import bot
+from RedditBot import bot, utils
 
 from itertools import groupby
 
@@ -33,7 +33,9 @@ def usage(context):
 @bot.command
 def raw(context):
     '''.raw <command>'''
-    if not context.line['prefix'] in bot.config.get('ADMINS', []):
+    #if not context.line['prefix'] in bot.config.get('ADMINS', []):
+    #    return
+    if not utils.isadmin(context.line['prefix']):
         return
     if context.args:
         command = context.args.split(' ', 1)[0]

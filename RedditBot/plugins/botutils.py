@@ -47,7 +47,7 @@ def usage(context):
             result.append(' '.join(grouped))
         result.sort()
         p = ', '.join(result)
-        bot.reply('Plugins currently loaded: ' + p. context=context, recipient=context.line['user']
+        bot.reply('Plugins currently loaded: ' + p, context=context, recipient=context.line['user'])
 
 
 @bot.command

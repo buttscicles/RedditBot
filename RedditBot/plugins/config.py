@@ -29,8 +29,7 @@ def config(context):
     '''.config (list|view|set|add|remove|revert) <key> [value]'''
     if not utils.isadmin(context.line['prefix'], bot):
         return
-    cmd, = str(context.args).split(' ', 1)
-    cmd = cmd.lower()
+    cmd = str(context.args).split(' ', 1)[0].lower()
     if not (cmd in ['list', 'set', 'add', 'remove', 'view', 'revert']):
         return
     if cmd == 'list':

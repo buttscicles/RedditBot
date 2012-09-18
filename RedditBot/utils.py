@@ -26,7 +26,7 @@ def isignored(prefix, bot):
     return any(imap(lambda x: glob(x).matches(prefix), ignore))
 
 
-def make_request(url, params={}, method='get'):
+def make_request(url, params={}, method='get', timeout=timeout):
     try:
         if method.lower() == 'post':
             r = requests.post(url, data=params, headers=headers, timeout=timeout)

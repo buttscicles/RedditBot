@@ -18,4 +18,4 @@ if not bot.h_config:
     bot.h_config = deepcopy(bot.config)
 
 # load our plugins
-from RedditBot.plugins import reddit, twitter, botutils, youtube, badword, tell, minecraft, google, lastfm, silly, config, kickrejoin, grab
+from RedditBot.plugins import reddit, twitter, botutils, youtube, badword, tell, minecraft, google, lastfm, silly, config, kickrejoin, grab, wolframalpha

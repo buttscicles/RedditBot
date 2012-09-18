@@ -31,7 +31,7 @@ def usage(context):
     if plugin:
         for p in bot.config['PLUGINS']:
             if plugin == p['hook']:
-                return p['funcs'][0].__doc__
+                bot.reply(p['funcs'][0].__doc__, context=context, recipient=context.line['user'])
     else:
         p = [(p['hook'], p['funcs']) for p in bot.config['PLUGINS']]
         p.sort(key=lambda t: t[1])
@@ -47,7 +47,7 @@ def usage(context):
             result.append(' '.join(grouped))
         result.sort()
         p = ', '.join(result)
-        return 'Plugins currently loaded: ' + p
+        bot.reply('Plugins currently loaded: ' + p. context=context, recipient=context.line['user']
 
 
 @bot.command

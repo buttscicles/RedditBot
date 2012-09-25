@@ -6,6 +6,7 @@ class Config(object):
     NICK = 'RedditBot'
     REALNAME = 'https://github.com/buttscicles/RedditBot'
     CHANNELS = ['#RedditMC']
+    MCBOUNCERKEY = ''
 
     ADMINS = ['*!*@AlcoJew.staff.reddit-minecraft',
               '*!joe@buttscicl.es',

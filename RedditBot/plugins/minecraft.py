@@ -33,6 +33,8 @@ def get_info(host, port):
 
         #Send 0xFE: Server list ping
         s.send('\xfe')
+        #Send a payload of 0x01 to trigger a new response if the server supports it
+        s.send('\x01')
 
         #Read as much data as we can (max packet size: 241 bytes)
         d = s.recv(256)
@@ -43,13 +45,24 @@ def get_info(host, port):
 
         #Remove the packet ident (0xFF) and the short containing the length of the string
         #Decode UCS-2 string
-        #Split into list
-        d = d[3:].decode('utf-16be').split(u'\xa7')
-
-        #Return a dict of values
-        return {'motd':         d[0],
-                'players':   int(d[1]),
-                'max_players': int(d[2])}
+        d = d[3:].decode('utf-16be')
+        
+        #If the response string starts with simolean1, then we're dealing with the new response
+        if (d.startswith(u'\xa7' + '1')):
+            d = d.split(u'\x00')
+            #Return a dict of values
+            return {'protocol_version': int(d[1]),
+                    'minecraft_version':    d[2],
+                    'motd':                 d[3],
+                    'players':          int(d[4]),
+                    'max_players':      int(d[5])}
+        else:
+            d = d.split(u'\xa7')
+            #Return a dict of values
+            return {'motd':         d[0],
+                    'players':   int(d[1]),
+                    'max_players': int(d[2])}
+                    
     except Exception, e:
         print e
         return False
